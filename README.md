@@ -6,7 +6,7 @@
 <h2>Project Walk-Through</h2>
 <br/>
 <p align="center">
-    <img src="https://imgur.com/fP2d0T9.png" height="80%" width="80%" alt="Project Overview Image">
+    <img src="https://imgur.com/an8fht5.png" height="80%" width="80%" alt="Project Overview Image">
 </p>
 <br/>
 <h2>Languages and Utilities Used</h2>
