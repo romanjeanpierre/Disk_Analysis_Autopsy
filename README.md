@@ -26,19 +26,18 @@ Data Artifacts > Operating System Information
 <li> Hostname: WIN-BK3J6TFMHLL </li>
 </oL>
 <br/>
-<h3>Find the list of processes</h3>
+<h3>Identify file that was downloaded at 2013-12-18 03:02:50 & URL</h3>
+Data Artifacts > Web Downloads
 <br/>
-<p> Command => <code>python vol.py -f /home/ubuntu/Desktop/Volatility\ Exercise/memdump1.mem --profile=Win7SP1x64 pslist</code></p>
 <br/>
-<img src="https://imgur.com/T07ndUW.png" height="80%" width="80%" alt="FTK Imager Memory Capture">
+<img src="https://imgur.com/JHKz4Wn.png" height="80%" width="80%" alt="FTK Imager Memory Capture">
 
-<h3>Display processes in Parent and Child Representation</h3>
+<h3>Identify the path of "Pier.jpg"</h3>
 <br/>
-Use the Parent-child relationship to detect unusual processes.
+Data Artifacts > Recent Documents
 <br/>
-<p> Command => <code>python vol.py -f /home/ubuntu/Desktop/Volatility\ Exercise/memdump1.mem --profile=Win7SP1x64 pstree </code></p>
 <br/>
-<img src="https://imgur.com/td5uSbc.png" height="80%" width="80%">
+<img src="https://imgur.com/1wFAOLU.png" height="80%" width="80%">
 
 <img src="https://imgur.com/UZnmFcg.png" height="80%" width="80%">
 <br/>
