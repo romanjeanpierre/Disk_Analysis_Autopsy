@@ -16,11 +16,14 @@ Select Host > Disk Image > Data source path > Select modules to ingest.
 <br/>
 <br/>
 <h3> Identify operating system & Hostname</h3>
+Data Artifacts > Operating System Information
+<br/>
+<br/>
 <img src="https://imgur.com/xHuOUMm.png" height="80%" width="80%" alt="Project Overview Image">
 <h3> Results:</h3>
-<oL>
-<li>Suggested Profile: Win7SP1x64</li> 
-<li>KDGB address value: 0xf80002bfa0a0L</li>
+<oL> 
+<li> Operating System: Windows 8 </li> 
+<li> Hostname: WIN-BK3J6TFMHLL </li>
 </oL>
 <br/>
 <h3>Find the list of processes</h3>
