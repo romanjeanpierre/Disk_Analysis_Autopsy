@@ -1,111 +1,84 @@
-<H1>Disk Image Analysis with Autopsy</H1>
+<h1>Disk Image Analysis with Autopsy</h1>
 
 <h2>Brief Description</h2>
-<p>This project involves conducting a disk analysis using Autopsy, a digital forensics tool. The goal is to answer specific questions related to an ongoing investigation by examining the disk image named "Craig Tucker.EO1" using Autopsy</p>
+<p>This project involves conducting a disk analysis using Autopsy, a digital forensics tool. The goal is to answer specific questions related to an ongoing investigation by examining the disk image named "Craig Tucker.EO1" using Autopsy.</p>
 
 <h2>Project Walk-Through</h2>
 <br/>
-<p align="center">
-    <img src="https://imgur.com/an8fht5.png" height="80%" width="80%" alt="Project Overview Image">
-</p>
+<h3>To start a Disk Image analysis with Autopsy </h3>
+Select Host > Disk Image > Data source path > Select modules to ingest.
 <br/>
-<h2>Languages and Utilities Used</h2>
-<ul>
-    <li><b>PowerShell</b></li>
-    <li><b>FTK Imager</b></li>
-    <li><b>ProcDump - sysinternals</b></li>
-    <li><b>KAPE</b></li>
-</ul>
+<br/>
+<img src="https://imgur.com/Zwvit9J.png" height="80%" width="80%" alt="Project Overview Image">
+<img src="https://imgur.com/esKcmJu.png" height="80%" width="80%" alt="Project Overview Image">
+<img src="https://imgur.com/cz3T0PS.png" height="80%" width="80%" alt="Project Overview Image">
+<img src="https://imgur.com/e547pmR.png" height="80%" width="80%" alt="Project Overview Image">
+<br/>
+<br/>
+Command => <code>python vol.py -f /home/ubuntu/Desktop/Volatility\ Exercise/memdump1.mem image info</code>
+<br/>
+<br/>
+<img src="https://imgur.com/C3Qo3mE.png" height="80%" width="80%" alt="Project Overview Image">
+<h3> Results:</h3>
+<oL>
+<li>Suggested Profile: Win7SP1x64</li> 
+<li>KDGB address value: 0xf80002bfa0a0L</li>
+</oL>
+<br/>
+<h3>Find the list of processes</h3>
+<br/>
+<p> Command => <code>python vol.py -f /home/ubuntu/Desktop/Volatility\ Exercise/memdump1.mem --profile=Win7SP1x64 pslist</code></p>
+<br/>
+<img src="https://imgur.com/T07ndUW.png" height="80%" width="80%" alt="FTK Imager Memory Capture">
 
-<h3>Collecting Memory Dump using FTK Imager</h3>
+<h3>Display processes in Parent and Child Representation</h3>
 <br/>
-<p>Open FTK Imager: Go to File > Capture Memory > Select Destination Path > Capture Memory</p>
+Use the Parent-child relationship to detect unusual processes.
 <br/>
-<img src="https://imgur.com/guy3Nys.png" height="80%" width="80%" alt="FTK Imager Memory Capture">
+<p> Command => <code>python vol.py -f /home/ubuntu/Desktop/Volatility\ Exercise/memdump1.mem --profile=Win7SP1x64 pstree </code></p>
 <br/>
-<br/>
-<h3>Collecting Memory Dump: ProcDump (Sysinternals) to retrieve memory image of a specific process</h3>
-<br/>
-<p>Change the Directory to where the procdump.exe file resides, use the calculator application as an example</p>
-<br/>
-<img src="https://imgur.com/Dj1GCrN.png" height="80%" width="80%" alt="ProcDump Directory Change">
-<br/>
-<br/>
-<p>Get Process ID (PID) for the calculator application</p>
-<br/>
-<p>Shell command: <code>Get-Process | findstr -I calc</code></p>
-<br/>
-<p>Results Output: PID = 4420</p>
-<br/>
-<img src="https://imgur.com/ABxLoZm.png" height="80%" width="80%" alt="PID Results Output">
-<br/>
-<br/>
-<p>After retrieving PID, use ProcDump to create a full memory dump of this process using:</p>
-<br/>
-<p>Command: <code>.\procdump.exe -ma 4420</code></p>
-<br/>
-<img src="https://imgur.com/K1zVv80.png" height="80%" width="80%" alt="ProcDump Memory Dump">
-<br/>
-<br/>
-<p>In an incident response engagement, we can use these utilities to capture the image of Malware running on a system.
-<br/>
-<br/>
-<h3>Collecting Disk Image using FTK Imager</h3>
-<br/>
-<p>Open FTK Imager: Go to File > Create Disk Image > Select Source from Physical Drive</p>
-<br/>
-<img src="https://imgur.com/liZWHGq.png" height="80%" width="80%" alt="FTK Imager Disk Image Creation">
-<br/>
-<br/>
-<p>Select a Drive input</p>
-<br/>
-<br/>
-<img src="https://imgur.com/Zxb4QuC.png" height="80%" width="80%" alt="Drive Input Selection">
-<br/>
-<br/>
-<p>Create Image - Select the output destination for the file. Click Add and change the format type to a .E01 file. This filetype is used by analysis tools, such as the enterprise-grade forensics triage software EnCase.</p>
-<br/>
-<img src="https://imgur.com/MVLtw1f.png" height="80%" width="80%" alt="FTK Imager Disk Image Output">
-<br/>
-<br/>
-<p>Select Output location and filename:</p>
-<br/>
-<img src="https://imgur.com/7o9Ijn0.png" height="80%" width="80%" alt="Output Location and Filename">
-<br/>
-<img src="https://imgur.com/eywXn2y.png" height="80%" width="80%" alt="Output Location and Filename 2">
-<br/>
-<p>Once the disk image is complete, FTK Imager will provide us with hash values for integrity purposes.</p>
-<!-- Add additional content as needed -->
+<img src="https://imgur.com/td5uSbc.png" height="80%" width="80%">
 
-</body>
-</html>
-<p>So we can ensure that the disk image or any copies are the exact same as when it was acquired. This allows us to prove or disprove claims of data corruption or tampering.</p>
+<img src="https://imgur.com/UZnmFcg.png" height="80%" width="80%">
 <br/>
-<img src="https://imgur.com/yXysp7b.png" height="80%" width="80%" alt="FTK Imager Disk Image Hash Values">
+svchost.exe process creates a cmd.exe child process, where the ping command is used, because we can see the ping.exe process being this will be considered unusual activity. 
 <br/>
 <br/>
-<h3>Live Acquisition - Remote KAPE</h3>
-<br/>
-<p>Copy and Paste the KAPE Application from Host to Guest workstation via a RDP connection</p>
-<br/>
-<img src="https://imgur.com/8ImXICP.png" height="80%" width="80%" alt="FTK Imager Disk Image Creation">
+<h3> Filtering processes with sum count </h3>
+<p>Finding how many processes with the name "svchost.exe" were running in the system</p>
+Command => <code> python vol.py -f /home/ubuntu/Desktop/Volatility\ Exercise/memdump1.mem --profile=Win7SP1x64 pslist | grep “svchost.exe” | wc -l </code>
 <br/>
 <br/>
-<p>Open KAPE on Guest workstation, Config target options, source, destination and items then > Execute </p>
+<img src="https://imgur.com/ZOcBykp.png" height="80%" width="80%" alt="PID Results Output">
+
+<h3> Finding command lines with associated PIDs </h3>
+Command => <code> python vol.py -f /home/ubuntu/Desktop/Volatility\ Exercise/memdump1.mem --profile=Win7SP1x64 cmdline -p 2352 </code>
 <br/>
 <br/>
-<img src="https://imgur.com/3DPZY6Q.png" height="80%" width="80%" alt="Drive Input Selection">
+<img src="https://imgur.com/LsRVX6r.png" height="80%" width="80%" alt="ProcDump Memory Dump">
+<h3>Filtering Malicious Network Connections</h3>
+A machine suspected to be infected by some type of malware. We need to identify the harmful IP related to the malware.
+<br/>
+Command => <code>python vol.py -f /home/ubuntu/Desktop/Volatility\ Exercise/memdump2.mem --profile=Win7SP1x64 netscan</code>
 <br/>
 <br/>
-<p>Exfiltrate Kape output from guest workstation to host workstation and analyze results.</p>
+<img src="https://imgur.com/cVl6nkP.png" height="80%" width="80%" alt="FTK Imager Disk Image Creation">
 <br/>
-<img src="https://imgur.com/Irq3N53.png" height="80%" width="80%" alt="FTK Imager Disk Image Output">
+WINWORD.EXE (Microsoft Word) was communicating to the Foreign IP 65[.]111[.]166[.]58 on port 80 (HTTP). Based on knowledge of phishing attacks, this is very likely to be a malicious Word document macro that is downloading malicious software from the mentioned IP address over HTTP.
 <br/>
 <br/>
-<!-- Add additional sections or content as needed -->
+<h3> Dump specific process and calculate MD5 Hash</h3>
+Filter process ID 2940 information and output to a directory path
+<br/>
+Command => <code>python vol.py -f /home/ubuntu/Desktop/Volatility\ Exercise/memdump2.mem --profile=Win7SP1x64 procdump -p 2940 -D /home/ubuntu/Desktop</code>
+<br/>
+<img src="https://imgur.com/kXUvhpb.png" height="80%" width="80%" alt="Drive Input Selection">
+<br/>
+Calculate MD5 Hash
+<img src="https://imgur.com/tINj1d6.png" height="80%" width="80%">
+<br/>
+<br/>
 
 <h2>Conclusion</h2>
-<p>In conclusion, the use of industry-standard tools such as FTK Imager, Sysinternals, and KAPE facilitates efficient and effective digital data acquisition for forensic purposes. The adherence to critical data integrity methodologies, including the Order of Volatility and Chain of Custody, ensures the reliability and admissibility of the acquired evidence in legal proceedings.</p>
-
-<p>This project walkthrough provides a comprehensive guide to collecting memory dumps and disk images, crucial steps in investigating and responding to incidents involving potentially compromised workstations.</p>
+<p>In conclusion, by leveraging Volatility we can successfully identify and analyze potential security incidents, malware infections, and suspicious activities within memory dump data.</p>
 
