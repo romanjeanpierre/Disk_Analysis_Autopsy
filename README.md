@@ -15,10 +15,8 @@ Select Host > Disk Image > Data source path > Select modules to ingest.
 <img src="https://imgur.com/e547pmR.png" height="80%" width="80%" alt="Project Overview Image">
 <br/>
 <br/>
-Command => <code>python vol.py -f /home/ubuntu/Desktop/Volatility\ Exercise/memdump1.mem image info</code>
-<br/>
-<br/>
-<img src="https://imgur.com/C3Qo3mE.png" height="80%" width="80%" alt="Project Overview Image">
+<h3> Identify operating system & Hostname</h3>
+<img src="https://imgur.com/xHuOUMm.png" height="80%" width="80%" alt="Project Overview Image">
 <h3> Results:</h3>
 <oL>
 <li>Suggested Profile: Win7SP1x64</li> 
